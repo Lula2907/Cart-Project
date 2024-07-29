@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Cart1.css">
+</head>
+<body onload="getallproducts();countcart()">
+
+    <table>
+        <tr>
+            <th><input type="text" placeholder="search" id="search" onkeyup="searchByName()"></th>
+        </tr>
+    </table>
+    <a href="Checkout.html" style="float: right;"><img src="263142.png" class="cart" alt=""><span id="count">0</span></a>
+
+    <div id="result">
+
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    
+    <script>
+        function countcart()
+        {
+            if(localStorage.getItem('allcarts'))
+            {
+                var allcarts = JSON.parse(localStorage.getItem('allcarts'))
+                document.getElementById("count").innerHTML=allcarts.length;
+            }
+            
+            else
+            {
+               document.getElementById("count").innerHTML="0";
+            }
+        }
+        function getallproducts()
+        {
+            $.ajax
+                    ({
+                        url:`https://dummyjson.com/products`,
+                        method:"get",
+                        data:{},
+                        success:function(response)
+                        {
+                            var products = response.products;
+                            var temp = "";
+                            for(var i=0; i<products.length; i++)
+                            {
+                                temp += '<div class="product">';
+                                temp += '<img src="'+products[i].thumbnail+'" alt="img not found">';
+                                temp += '<h3>'+products[i].title+'</h3>';
+                                temp += '<h4>'+products[i].price+'</h4>';
+                                temp += '<button>Buy now</button>';
+                                temp += '<button onclick="addtocart('+products[i].id+')">Add to cart</button>';
+                                temp += '</div>';
+                            }
+
+                            document.getElementById('result').innerHTML = temp;
+                        }
+                    })
+        }
+
+        function addtocart(id)
+        {
+            var newcart = 
+            {
+                "pid": id,
+                "quantity": 1
+            }
+
+            if(localStorage.getItem('allcarts'))
+            {
+                var allcarts = JSON.parse(localStorage.getItem('allcarts'))
+                allcarts.push(newcart)
+                localStorage.setItem('allcarts', JSON.stringify(allcarts))
+            }
+            
+            else
+            {
+                var allcarts = []
+                allcarts.push(newcart)
+                localStorage.setItem('allcarts', JSON.stringify(allcarts))
+            }
+
+            alert("Added")
+            countcart();
+        }
+
+
+        function searchByName()
+        {
+            var search=document.getElementById("search").value;
+
+            $.ajax
+                    ({
+                        url:`https://dummyjson.com/products`,
+                        method:"get",
+                        data:{},
+                        success:function(response)
+                        {
+                            var products = response.products;
+                            var temp = "";
+                            for(var i=0; i<products.length; i++)
+                            {
+                                var pname=products[i].title;
+                                var name=pname.substring(0,search.length)
+                                if(name.toLowerCase() == search.toLowerCase())
+                                {
+                                    temp += '<div class="product">';
+                                    temp += '<img src="'+products[i].thumbnail+'" alt="img not found">';
+                                    temp += '<h3>'+products[i].title+'</h3>';
+                                    temp += '<h4>'+products[i].price+'</h4>';
+                                    temp += '<button>Buy now</button>';
+                                    temp += '<button onclick="addtocart('+products[i].id+')">Add to cart</button>';
+                                    temp += '</div>';
+                                }
+
+                                
+                            }
+
+                            document.getElementById('result').innerHTML = temp;
+                        }
+                    })
+        }
+    </script>
+</body>
+</html>

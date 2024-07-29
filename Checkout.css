@@ -1,0 +1,139 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Table Styles */
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table th, .table td {
+    padding: 15px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.table tbody tr {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tbody tr td {
+    border-top: 1px solid #dee2e6;
+}
+
+.table tbody tr td:first-child,
+.table tbody tr td:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.table thead th:first-child,
+.table thead th:last-child {
+    border-radius: 10px 0 0 10px;
+}
+
+/* Product Image */
+.pic {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Total and Button Styles */
+tfoot {
+    font-weight: bold;
+}
+
+tfoot td {
+    padding: 10px 15px;
+    text-align: right;
+}
+
+.button-paynow {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-paynow:hover {
+    background-color: #218838;
+}
+
+.button-paynow:active {
+    background-color: #1e7e34;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-control button {
+    border: none;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-control button:hover {
+    background-color: #e0e0e0;
+}
+
+.quantity-control button:active {
+    background-color: #d0d0d0;
+}
+
+.quantity-control span {
+    margin: 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .table th, .table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .pic {
+        width: 40px;
+        height: 40px;
+    }
+
+    .button-paynow {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
